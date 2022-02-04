@@ -1,0 +1,14 @@
+#title {
+  font-size: 60px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.labels {
+  color: blueviolet;
+  font-size: 60px;
+}
+
+.bar:hover {
+  fill: rgb(93, 185, 238);
+}

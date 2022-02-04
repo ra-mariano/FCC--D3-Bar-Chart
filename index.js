@@ -11,24 +11,65 @@ req.onload = function(){
  
  console.log(dataset)
 
- const w = 1000;
- const h = 500;
+ const w = 1220;
+ const h = 541.941;
 
-    const svg = d3.select("body")
-                  .append("svg")
-                  .attr("width", w)
-                  .attr("height", h);
-      
-    svg.selectAll("rect")
+ 
+
+
+ const xscale = d3.scaleLinear()
+    .domain([1947, 2015])
+    .range([0, 1155]);
+
+const yscale = d3.scaleLinear()
+   .domain([243.1, 18064.7])
+   .range([541.941, 0])
+
+
+
+
+ 
+ const svgarea = d3.select("body")
+ .append("svg")
+ .attr("width", w)
+ .attr("height", h+50);
+ 
+    svgarea.selectAll("rect")
        .data(dataset)
        .enter()
        .append("rect")
-       .attr("x", (d, i) => i * 30)
-       .attr("y", (d)=> h-(3*d))
-       .attr("width", 25)
+       .attr("x", (d,i) => (i* 4.2)+50)
+       .attr("y", (d)=> (h-(d[1])*.03))
+       .attr("width", 3.5)
        .attr("height", (d, i) => {
-return d[1]})
+return (d[1])*.03})
         .attr("fill", "navy")
+        .attr("class", "bar")
+        
+   
+       
+        
+        var tooltip = d3.select('body')
+        .append('div')
+        .attr('id', 'tooltip')
+
+        tooltip.html("balls")
+       
+       
+
+        const xAxis = d3.axisBottom(xscale);
+     
+        svgarea.append("g")
+           .attr("transform", "translate(50," + h + ")")
+           .call(xAxis)
+           .attr("id", "x-axis")
+
+      const yAxis = d3.axisLeft(yscale);
+     
+        svgarea.append("g")
+           .attr("transform", "translate("+50+", 0)")
+           .call(yAxis)
+           .attr("id", "y-axis")
 };
 
 
