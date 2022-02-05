@@ -38,6 +38,7 @@ const yscale = d3.scaleLinear()
        .data(dataset)
        .enter()
        .append("rect")
+       .attr("id", "bars")
        .attr("x", (d,i) => (i* 4.2)+50)
        .attr("y", (d)=> (h-(d[1])*.03))
        .attr("width", 3.5)
@@ -49,11 +50,21 @@ return (d[1])*.03})
    
        
         
-        var tooltip = d3.select('body')
-        .append('div')
-        .attr('id', 'tooltip')
-
-        tooltip.html("balls")
+        var tooltip = d3.select("rect")
+        .data(dataset)
+       .enter()
+        .append("div")
+         .style("visibility", "hidden")
+         .attr('index', (d, i) => i)
+         
+         
+         d3.select("rect")
+         .on("mouseover", function (event, d){
+     var i = this.getAttribute('index');  
+   return tooltip.style("visibility", "visible")
+  .html((d,i)=>d[i]);
+})
+  .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
        
        
 
