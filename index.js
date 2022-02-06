@@ -48,20 +48,20 @@ return (d[1])*.03})
         .attr("class", "bar")
         
    
-        var tooltip = d3.select("#bars")
-        .data(dataset)
-       .enter()
+        var tooltip = d3
+        .select("body")
         .append("div")
          .style("visibility", "hidden")
-         .attr('index', (d, i) => i)
+        
          
          
          d3.selectAll("#bars")
          .on("mouseover", function (event, d){
-           
-     var i = this.getAttribute('index');  
+         
+           console.log(d)
    return tooltip.style("visibility", "visible")
   .html(d[1]);
+ 
 })
   .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
        
