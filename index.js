@@ -13,17 +13,17 @@ req.onload = function(){
 
  const w = 1220;
  const h = 541.941;
-
+let regex=/\d\d\d\d/
  
 
 
  const xscale = d3.scaleLinear()
-    .domain([1947, 2015])
+    .domain([1947, 2016])
     .range([0, 1155]);
 
 const yscale = d3.scaleLinear()
-   .domain([243.1, 18064.7])
-   .range([541.941, 0])
+   .domain([0, 18064.7])
+   .range([h, 0])
 
 
 
@@ -47,6 +47,8 @@ return (d[1])*.03})
         .attr("fill", "navy")
         .attr("class", "bar")
         .attr('index', (d, i) => i)
+        .attr("data-date", (d)=>(d[0]))
+        .attr("data-gdp", (d=>(d[1])))
         
         
         
@@ -55,6 +57,7 @@ return (d[1])*.03})
         .append("div")
         .style("visibility", "hidden")
         .attr('id', 'tooltip')
+        
        
         
        
@@ -62,19 +65,25 @@ return (d[1])*.03})
          
          
          d3.selectAll("#bars")
+    
          .on("mouseover", function (event, d){
-         
-           
+          var date = this.getAttribute('data-date');  
+          var gdp = this.getAttribute("data-gdp")
+        
+          console.log(date) 
+          
    return tooltip.style("visibility", "visible")
-  .html(d[1]);
+  .html(date + "<br>"+"$"+gdp+" BILLION")
+  .attr("data-date",date)
+  
  })
 
- .on("mousemove", function(){
+ .on("mousemove", function(event, d){
   var i = this.getAttribute('index');
-  console.log(d[1])
+ 
   return tooltip
-  .style('left', i*4.2  +"px")
-  .style('top', d[1]  +"px")
+  .style('left', (i*4.2)+(200/i)  +"px")
+  .style('top', h- (d[1]*.03)+50 +"px")
 })
 
 
