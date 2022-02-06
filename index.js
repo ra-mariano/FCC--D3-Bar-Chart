@@ -11,7 +11,7 @@ req.onload = function(){
  
  console.log(dataset)
 
- const w = 1220;
+ const w = 1190;
  const h = 541.941;
 let regex=/\d\d\d\d/
  
@@ -19,7 +19,7 @@ let regex=/\d\d\d\d/
 
  const xscale = d3.scaleLinear()
     .domain([1947, 2016])
-    .range([0, 1155]);
+    .range([0, w-100]);
 
 const yscale = d3.scaleLinear()
    .domain([0, 18064.7])
@@ -39,9 +39,9 @@ const yscale = d3.scaleLinear()
        .enter()
        .append("rect")
        .attr("id", "bars")
-       .attr("x", (d,i) => (i* 4.2)+50)
+       .attr("x", (d,i) => (i* 4)+50)
        .attr("y", (d)=> (h-(d[1])*.03))
-       .attr("width", 3.5)
+       .attr("width", 3)
        .attr("height", (d,i) => {
 return (d[1])*.03})
         .attr("fill", "navy")
@@ -82,7 +82,7 @@ return (d[1])*.03})
   var i = this.getAttribute('index');
  
   return tooltip
-  .style('left', (i*4.2)+(200/i)  +"px")
+  .style('left', (i*4)  +"px")
   .style('top', h- (d[1]*.03)+50 +"px")
 })
 
