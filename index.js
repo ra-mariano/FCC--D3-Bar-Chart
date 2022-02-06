@@ -46,23 +46,38 @@ const yscale = d3.scaleLinear()
 return (d[1])*.03})
         .attr("fill", "navy")
         .attr("class", "bar")
+        .attr('index', (d, i) => i)
         
-   
+        
+        
         var tooltip = d3
         .select("body")
         .append("div")
-         .style("visibility", "hidden")
+        .style("visibility", "hidden")
+        .attr('id', 'tooltip')
+       
+        
+       
         
          
          
          d3.selectAll("#bars")
          .on("mouseover", function (event, d){
          
-           console.log(d)
+           
    return tooltip.style("visibility", "visible")
   .html(d[1]);
- 
+ })
+
+ .on("mousemove", function(){
+  var i = this.getAttribute('index');
+  console.log(d[1])
+  return tooltip
+  .style('left', i*4.2  +"px")
+  .style('top', d[1]  +"px")
 })
+
+
   .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
        
        
