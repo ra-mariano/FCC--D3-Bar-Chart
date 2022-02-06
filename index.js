@@ -42,15 +42,13 @@ const yscale = d3.scaleLinear()
        .attr("x", (d,i) => (i* 4.2)+50)
        .attr("y", (d)=> (h-(d[1])*.03))
        .attr("width", 3.5)
-       .attr("height", (d, i) => {
+       .attr("height", (d,i) => {
 return (d[1])*.03})
         .attr("fill", "navy")
         .attr("class", "bar")
         
    
-       
-        
-        var tooltip = d3.select("rect")
+        var tooltip = d3.select("#bars")
         .data(dataset)
        .enter()
         .append("div")
@@ -58,11 +56,12 @@ return (d[1])*.03})
          .attr('index', (d, i) => i)
          
          
-         d3.select("rect")
+         d3.selectAll("#bars")
          .on("mouseover", function (event, d){
+           
      var i = this.getAttribute('index');  
    return tooltip.style("visibility", "visible")
-  .html((d,i)=>d[i]);
+  .html(d[1]);
 })
   .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
        
