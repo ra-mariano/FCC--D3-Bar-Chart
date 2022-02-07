@@ -11,15 +11,15 @@ req.onload = function(){
  
  console.log(dataset)
 
- const w = 1190;
+ const w = 1424;
  const h = 541.941;
-let regex=/\d\d\d\d/
+
  
 
 
- const xscale = d3.scaleLinear()
-    .domain([1947, 2016])
-    .range([0, w-100]);
+ const xscale = d3.scaleTime()
+    .domain([new Date(1947,01,01),new Date(2015,07,01)])
+    .range([0, 1374]);
 
 const yscale = d3.scaleLinear()
    .domain([0, 18064.7])
@@ -39,9 +39,9 @@ const yscale = d3.scaleLinear()
        .enter()
        .append("rect")
        .attr("id", "bars")
-       .attr("x", (d,i) => (i* 4)+50)
+       .attr("x", (d,i) => (i* 5)+40)
        .attr("y", (d)=> (h-(d[1])*.03))
-       .attr("width", 3)
+       .attr("width", 4)
        .attr("height", (d,i) => {
 return (d[1])*.03})
         .attr("fill", "navy")
@@ -70,7 +70,7 @@ return (d[1])*.03})
           var date = this.getAttribute('data-date');  
           var gdp = this.getAttribute("data-gdp")
         
-          console.log(date) 
+        //  console.log(date) 
           
    return tooltip.style("visibility", "visible")
   .html(date + "<br>"+"$"+gdp+" BILLION")
@@ -82,7 +82,7 @@ return (d[1])*.03})
   var i = this.getAttribute('index');
  
   return tooltip
-  .style('left', (i*4)  +"px")
+  .style('left', (i*4.8)  +"px")
   .style('top', h- (d[1]*.03)+50 +"px")
 })
 
@@ -94,14 +94,14 @@ return (d[1])*.03})
         const xAxis = d3.axisBottom(xscale);
      
         svgarea.append("g")
-           .attr("transform", "translate(50," + h + ")")
+           .attr("transform", "translate(40," + h + ")")
            .call(xAxis)
            .attr("id", "x-axis")
 
       const yAxis = d3.axisLeft(yscale);
      
         svgarea.append("g")
-           .attr("transform", "translate("+50+", 0)")
+           .attr("transform", "translate("+40+", 0)")
            .call(yAxis)
            .attr("id", "y-axis")
 };
